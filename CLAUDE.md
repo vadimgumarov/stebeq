@@ -1,490 +1,503 @@
-# CLAUDE.md - AI Assistant Guide for stebeq
+# CLAUDE.md - Universal Development Framework v2.1
 
-> **Last Updated**: 2025-11-18
-> **Repository**: vadimgumarov/stebeq
-> **Purpose**: Comprehensive guide for AI assistants working with this codebase
-
-## Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Repository Structure](#repository-structure)
-3. [Development Workflow](#development-workflow)
-4. [Coding Conventions](#coding-conventions)
-5. [Git Workflow](#git-workflow)
-6. [Testing Strategy](#testing-strategy)
-7. [Common Tasks](#common-tasks)
-8. [AI Assistant Guidelines](#ai-assistant-guidelines)
+## QUICK START PROTOCOL
+```
+1. Read docs/CONTINUATION.md FIRST - Get current state
+2. Read .claude_project - Get project context  
+3. State current context - [branch: ... | issue: #... | status: ...]
+4. Proceed with work following TDD methodology
+5. Update docs on completion - 30 seconds
+```
 
 ---
 
-## Project Overview
+## CORE FOUNDATION
+*[Always Required - Universal Across All Projects]*
 
-### What is stebeq?
+### Communication Standards
+- **Experience Context**: Software Architect / Senior Developer / Project manager with 20 total years of experience in launching products and working in startups - skip basics
+- **Business-Friendly Language**: No jargon, explain decisions in business impact terms
+- **Direct Responses Only**: No fluff, affirmations, or apologies
+- **Brevity Rule**: 4 lines max unless architecture/debugging/security requires detail
+- **No Emojis**: Professional communication only
+- **State Tracking**: Every response must include `[branch: ... | issue: #... | status: ...]`
 
-This repository contains the stebeq project. As the codebase evolves, this section should be updated with:
-- Project purpose and goals
-- Key features and functionality
-- Target users and use cases
-- Technology stack and architecture decisions
+### Production Standards
+- **Production-Ready Solutions**: Scalable, maintainable, secure by default
+- **No Placeholders**: Complete implementations only - no TODOs
+- **Architectural Options**: Present alternatives with trade-offs
+- **Proactive Flags**: Security/performance implications upfront
 
-### Tech Stack
-
-**To be determined as project develops. Common stacks might include:**
-
-- **Frontend**: React, Vue, Angular, or other framework
-- **Backend**: Node.js, Python, Go, or other runtime/language
-- **Database**: PostgreSQL, MongoDB, MySQL, or other database
-- **Build Tools**: Webpack, Vite, esbuild, or other bundler
-- **Testing**: Jest, Vitest, Pytest, or other framework
-- **CI/CD**: GitHub Actions, GitLab CI, or other platform
-
----
-
-## Repository Structure
-
-```
-stebeq/
-├── .git/                  # Git repository data
-├── CLAUDE.md              # This file - AI assistant guide
-├── README.md              # Project documentation (to be created)
-├── package.json           # Node.js dependencies (if applicable)
-├── src/                   # Source code (to be created)
-│   ├── components/        # Reusable components
-│   ├── services/          # Business logic and API services
-│   ├── utils/             # Utility functions
-│   └── config/            # Configuration files
-├── tests/                 # Test files
-├── docs/                  # Additional documentation
-└── scripts/               # Build and deployment scripts
-```
-
-**Note**: This structure will be updated as the project architecture is defined.
+### Context & Scope Management
+- **Clarification First**: Ask for clarification even if in smallest doubt, never assume
+- **Solution Types**: Distinguish between quick fixes and proper solutions
+- **Challenge Suboptimal**: If approach is clearly suboptimal, suggest alternatives
+- **Present Outcomes**: Trade-offs first, then implementation options
 
 ---
 
-## Development Workflow
+## DECISION AUTHORITY FRAMEWORK
 
-### Initial Setup
+### MUST CONSULT (never invent or assume):
+- Project-wide standards (naming conventions, file structure, validation rules)
+- Architecture patterns not already established in codebase
+- Breaking changes to existing APIs or interfaces
+- New dependencies or technology choices
+- Security policies or authentication flows
+- Deployment strategies or CI/CD pipeline changes
 
-```bash
-# Clone the repository
-git clone <repository-url>
-cd stebeq
+### Process for consultation:
+1. State the decision that needs to be made
+2. Present 2-3 options with pros/cons (include industry best practices)
+3. Recommend preferred option with reasoning
+4. Wait for explicit confirmation before implementing
 
-# Install dependencies (when package.json exists)
-npm install  # or yarn install, pnpm install, etc.
+### CAN DECIDE INDEPENDENTLY:
+- Bug fixes that don't change behavior
+- Code refactoring within same module (no API changes)
+- Test additions or improvements
+- Documentation updates
+- Variable/function naming within a file
 
-# Set up environment variables (if needed)
-cp .env.example .env
-```
-
-### Development Process
-
-1. **Before Starting Work**
-   - Fetch latest changes: `git fetch origin`
-   - Create or switch to feature branch
-   - Ensure dependencies are up to date
-
-2. **During Development**
-   - Write code following conventions (see below)
-   - Write tests for new functionality
-   - Run tests frequently: `npm test` (or equivalent)
-   - Commit early and often with clear messages
-
-3. **Before Committing**
-   - Run linter: `npm run lint` (when configured)
-   - Run tests: `npm test`
-   - Build project: `npm run build` (when configured)
-   - Review changes: `git diff`
-
-4. **Code Review**
-   - Create pull request with descriptive title and body
-   - Link related issues
-   - Request review from team members
-   - Address feedback promptly
+**Golden Rule**: If it sets a precedent or affects project structure → consult first
 
 ---
 
-## Coding Conventions
+## ENTERPRISE TDD TESTING FRAMEWORK (MANDATORY)
 
-### General Principles
+### Test-First Development Process (STRICT TDD)
+**Every development cycle MUST follow:**
+1. **Write failing unit tests FIRST** - Define expected behavior
+2. **Write minimal code** - Make tests pass
+3. **Refactor** - Improve code while keeping tests green
+4. **Write integration tests** - Test component interactions
+5. **Write end-to-end tests** - Verify user workflows
+6. **Document & commit** - Update docs and commit changes
 
-- **Clarity over cleverness**: Write code that's easy to understand
-- **Consistency**: Follow existing patterns in the codebase
-- **DRY (Don't Repeat Yourself)**: Extract common logic into reusable functions
-- **SOLID principles**: Especially Single Responsibility and Dependency Inversion
-- **Error handling**: Always handle errors gracefully with meaningful messages
-
-### File Naming
-
-- Use kebab-case for file names: `user-service.js`, `api-client.ts`
-- Use PascalCase for class/component files: `UserProfile.jsx`, `DataService.ts`
-- Test files should mirror source files: `user-service.test.js`
-
-### Code Style
-
-**To be defined based on project language/framework:**
-
-- **Indentation**: 2 or 4 spaces (no tabs)
-- **Line length**: 80-120 characters max
-- **Quotes**: Single or double (be consistent)
-- **Semicolons**: Use or don't use (be consistent)
-- **Trailing commas**: Use in multiline structures
-
-### Comments and Documentation
-
-```javascript
-/**
- * Brief description of function purpose
- *
- * @param {Type} paramName - Description of parameter
- * @returns {Type} Description of return value
- * @throws {ErrorType} When error occurs
- */
-function exampleFunction(paramName) {
-  // Implementation
-}
-```
-
-- Use JSDoc/docstrings for public APIs
-- Comment "why" not "what" (code should be self-documenting)
-- Keep comments up to date with code changes
-- Use TODO/FIXME/NOTE comments appropriately
-
----
-
-## Git Workflow
-
-### Branch Naming Convention
-
-- **Feature branches**: `feature/description` or `feat/description`
-- **Bug fixes**: `fix/description` or `bugfix/description`
-- **Hotfixes**: `hotfix/description`
-- **Documentation**: `docs/description`
-- **Refactoring**: `refactor/description`
-- **Claude branches**: `claude/claude-md-*` (for AI assistant work)
-
-### Commit Message Format
-
-Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
-
-```
-<type>(<scope>): <subject>
-
-<body>
-
-<footer>
-```
-
-**Types:**
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, semicolons, etc.)
-- `refactor`: Code refactoring
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks, dependencies
-
-**Examples:**
-```
-feat(auth): add JWT token authentication
-
-Implement JWT-based authentication system with refresh tokens.
-Includes middleware for route protection.
-
-Closes #123
-```
-
-```
-fix(api): handle null response in user endpoint
-
-Add null check before accessing user data to prevent crashes.
-```
-
-### Pull Request Guidelines
-
-1. **Title**: Clear and descriptive
-2. **Description**:
-   - What changes were made
-   - Why they were made
-   - How to test them
-3. **Link Issues**: Use "Closes #123" or "Fixes #456"
-4. **Small PRs**: Keep changes focused and reviewable
-5. **Tests**: Include tests for new functionality
-6. **Documentation**: Update docs if needed
-
----
-
-## Testing Strategy
-
-### Testing Pyramid
-
-1. **Unit Tests** (most)
-   - Test individual functions and components
-   - Fast, isolated, numerous
-   - Target: 80%+ code coverage
-
-2. **Integration Tests** (medium)
-   - Test component interactions
-   - Test API endpoints
-   - Test database operations
-
-3. **E2E Tests** (least)
-   - Test critical user flows
-   - Test main application features
-   - Run before releases
-
-### Test File Organization
-
+### Test Pyramid Structure (Enterprise Level)
 ```
 tests/
-├── unit/              # Unit tests
-├── integration/       # Integration tests
-└── e2e/              # End-to-end tests
+├── unit/                    # 70% - Fast, isolated (95%+ coverage target)
+│   ├── [module]/           # Unit tests organized by code module
+│   └── fixtures/           # Test data and mocks
+├── integration/            # 20% - Real dependencies 
+│   ├── [feature]/          # Integration tests by feature
+│   └── contracts/          # API contract tests
+├── e2e/                   # 10% - End-to-end user workflows
+│   ├── [workflow]/         # Complete user journeys
+│   └── performance/        # Load and performance tests
+├── mutation/              # Mutation testing for test quality
+├── contract/              # Consumer-driven contract tests
+└── chaos/                 # Chaos engineering tests
 ```
 
-Or co-located with source files:
+### Testing Requirements (Non-Negotiable)
+- **95%+ Unit Test Coverage** - No exceptions for new code
+- **100% Critical Path Coverage** - E2E tests for all user workflows
+- **Real Dependencies in Integration** - No mocks for databases, APIs, external services
+- **Test Data Management** - Automated setup/teardown, isolated test data
+- **Performance Benchmarks** - Automated performance regression detection
+- **Mutation Testing** - Verify test quality with mutation testing tools
+- **Property-Based Testing** - Use property-based tests for complex algorithms
+
+### Test Quality Gates
+- All tests must pass before any commit
+- Performance tests must not regress beyond defined thresholds
+- Security tests must pass (SAST, dependency scanning)
+- Code coverage cannot decrease
+- Integration tests must run against real services
+- Contract tests must verify API compatibility
+
+---
+
+## PROCESS GATES (MANDATORY)
+
+### Emergency Protocol
+When user indicates urgency ("urgent", "ASAP", "critical", specific deadline):
+- **Immediate Brief Response**: Provide actionable answer first
+- **Offer Elaboration**: "Want me to elaborate on any part?"
+- **Return to Normal**: Resume standard behavior after emergency
+
+### Session Start (New Conversation)
 ```
-src/
-├── components/
-│   ├── Button.jsx
-│   └── Button.test.jsx
+1. Read docs/CONTINUATION.md → get current state (PRIORITY #1)
+2. Read .claude_project → get project context
+3. Run git status → assess working directory state  
+4. Check recent commits → understand recent work
+5. Check open issues → identify priorities
+6. MANDATORY: State current context → [branch: ... | issue: #... | status: ...] → confirm understanding
 ```
 
-### Running Tests
+### Session Continue (Existing Conversation)
+```
+1. Read docs/CONTINUATION.md → get current state if context lost (PRIORITY #1)
+2. Check current branch → verify correct context
+3. Check uncommitted changes → understand WIP
+4. Review conversation history → maintain continuity
+5. MANDATORY: State current context → [branch: ... | issue: #... | status: ...] → confirm alignment
+```
 
-```bash
-# Run all tests
-npm test
+### Before Making ANY Changes
+```
+Check clean state → git status
+Uncommitted changes? → stash or commit as WIP
+Verify correct branch → matches intended issue
+Pull latest → git pull origin main
+Branch outdated? → rebase or merge main
+Conflicts? → resolve before starting new work
+```
 
-# Run specific test file
-npm test -- path/to/test.js
+### Issue Validation (Before Starting Work)
+```
+Read issue → has acceptance criteria?
+Dependencies listed? → check if blocked
+Missing details? → ask in issue comments
+Wait for clarification → don't assume
+Should be in Epic? → suggest reorganization
+Scope clear? → document understanding in issue
+```
 
-# Run tests in watch mode
-npm test -- --watch
+### Epic & Child Issue Workflow
+```
+Starting Epic:
+1. Create Epic branch → feature/[epic#]-[brief-description]
+2. Read Epic description → understand effort and Child Issues
+3. Update Epic status → In Progress
+4. State current context → [branch: ... | issue: #... | status: ...]
 
-# Run tests with coverage
-npm test -- --coverage
+Working Child Issues (Within Epic):
+1. STAY on Epic branch (no separate branch)
+2. Read Child description → understand effort
+3. Update Child issue status → In Progress
+4. Write tests FIRST → following TDD methodology
+5. Implement to pass tests
+6. Commit with child issue reference → "feat: implement feature (#227)"
+7. Complete child → close issue, continue next child on SAME epic branch
+```
+
+### Completing Work Protocol
+```
+1. Run full test suite → all tests must pass
+2. Run code quality checks → linting, formatting, security
+3. Update issue status → Done, close issue
+4. Commit changes → proper format with issue reference
+5. MANDATORY: Update PROGRESS.md → append completion entry with date
+6. MANDATORY: Update CONTINUATION.md → rewrite current status completely
+7. Document solution in ISSUES.md → if solved a tricky problem
+8. Push branch → backup completed work
 ```
 
 ---
 
-## Common Tasks
+## VERSION CONTROL STANDARDS (STRICT)
 
-### Adding a New Feature
-
-1. Create feature branch: `git checkout -b feature/feature-name`
-2. Implement feature with tests
-3. Update documentation
-4. Commit changes with conventional commits
-5. Push and create pull request
-
-### Fixing a Bug
-
-1. Create bug fix branch: `git checkout -b fix/bug-description`
-2. Write failing test that reproduces bug
-3. Fix the bug
-4. Verify test passes
-5. Commit and create pull request
-
-### Updating Dependencies
-
-```bash
-# Check for outdated packages
-npm outdated
-
-# Update specific package
-npm update package-name
-
-# Update all packages (carefully)
-npm update
-
-# For major version updates
-npm install package-name@latest
+### Branching Strategy (UNIVERSAL)
+```
+Standalone Issue → fix/[issue#]-[brief] or feat/[issue#]-[brief]
+Epic → feature/[epic#]-[epic-name] (ALL child work here)
+Child Issues → NO separate branches (work on epic branch)
+Hotfix → hotfix/[issue#]-[brief] from main
 ```
 
-### Running the Application
+### Commit Format (MANDATORY)
+```
+type: description (#ISSUE)
 
-```bash
-# Development mode
-npm run dev
+Types: feat, fix, docs, refactor, test, perf, chore
+WIP prefix: for work-in-progress (tests failing acceptable)
 
-# Production build
-npm run build
+Examples:
+feat: add user authentication (#123)
+fix: resolve memory leak in data processing (#124) 
+test: add unit tests for payment service (#125)
+refactor: improve error handling in API layer (#126)
+```
 
-# Start production server
-npm start
+### Commit Requirements (STRICT)
+- **Every commit needs issue reference** (except chore commits)
+- **NEVER add "🤖 Generated with Claude Code" signatures**
+- **NEVER add "Co-Authored-By: Claude" signatures**  
+- **NEVER mention "Claude" or "AI-generated" in commit messages**
+- **Commit frequently** at logical breakpoints
+- **Push daily** for backup
+- **Never force push** to shared branches
+- **Test before commit** - all tests must pass
+
+---
+
+## DOCUMENTATION STRUCTURE (MANDATORY)
+
+### PROGRESS.md (Minimal Append-Only Log)
+```markdown
+## YYYY-MM-DD
+- Completed: Issue #X - brief description
+- Tests: [unit/integration/e2e coverage added]
+- Performance: [impact if significant]
+- Discovered: [key insight if any]
+```
+
+### CONTINUATION.md (Detailed Current State - Always Rewritten)
+```markdown
+## Current Status
+- Working on: Issue #X - [detailed description of current work]
+- Branch: [current branch name]
+- Test Status: [current test coverage state]
+- Last session: [what was accomplished in last work session]
+- Current focus: [specific task being worked on right now]
+
+## Immediate Next Steps (TDD Order)
+1. [specific next test to write with full context]
+2. [implementation step to make test pass]
+3. [refactoring opportunity with safety considerations]
+4. [integration test needed with dependencies]
+
+## Context & Recent Decisions
+- [important technical decisions made recently with reasoning]
+- [architectural choices and their implications]
+- [test patterns established and their rationale]
+- [performance benchmarks and their targets]
+- [security considerations and implemented safeguards]
+
+## Test Status & Coverage
+- Unit test coverage: [percentage]
+- Integration tests: [list of covered scenarios]
+- E2E tests: [list of verified workflows]
+- Performance tests: [benchmarks and targets]
+- Known test gaps: [areas needing test coverage]
+
+## Session Handoff Notes
+- [anything crucial for next session to know]
+- [warnings or important considerations for future work]
+- [specific files/areas that need attention or review]
+- [any partial work or WIP that needs completion]
+- [test failures or flaky tests to address]
+```
+
+### ISSUES.md (Problems & Solutions)
+```markdown
+## Problem: [Description]
+**Symptoms**: What happens
+**Root Cause**: Why it happens  
+**Solution**: How to fix
+**Tests Added**: What tests prevent regression
+**Prevention**: How to avoid
+**Related Issues**: #X, #Y
 ```
 
 ---
 
-## AI Assistant Guidelines
+## GITHUB INTEGRATION
 
-### Best Practices for AI Assistants
+### Issue Templates
 
-1. **Always Read Before Writing**
-   - Use Read tool to understand existing code
-   - Review related files for context
-   - Check for similar implementations
+#### Standard Issue Template
+```markdown
+### Summary
+[One-line description of the issue]
 
-2. **Follow Existing Patterns**
-   - Match the style of surrounding code
-   - Use established utility functions
-   - Follow naming conventions
+### Current Behavior
+[What happens now]
 
-3. **Security First**
-   - Never introduce SQL injection vulnerabilities
-   - Avoid XSS vulnerabilities
-   - Validate and sanitize all inputs
-   - Never commit secrets or credentials
-   - Use environment variables for sensitive data
+### Expected Behavior  
+[What should happen]
 
-4. **Test Everything**
-   - Write tests for new functionality
-   - Update tests when changing code
-   - Run tests before committing
-   - Aim for high code coverage
+### Acceptance Criteria
+- [ ] [Specific measurable outcome with test verification]
+- [ ] [Another requirement with test coverage]
+- [ ] [Unit tests written and passing]
+- [ ] [Integration tests covering feature]
+- [ ] [Documentation updated]
 
-5. **Clear Communication**
-   - Explain what you're doing and why
-   - Use file:line references when discussing code
-   - Ask for clarification when requirements are unclear
-   - Document non-obvious decisions
+### Testing Requirements
+- [ ] Unit tests achieving 95%+ coverage
+- [ ] Integration tests with real dependencies
+- [ ] E2E tests for user workflows
+- [ ] Performance benchmarks established
 
-6. **Git Hygiene**
-   - Make atomic commits (one logical change per commit)
-   - Write clear, descriptive commit messages
-   - Never commit directly to main/master
-   - Always work on feature branches
-   - Push to branches starting with `claude/` for AI work
-
-### Common Pitfalls to Avoid
-
-❌ **Don't:**
-- Commit commented-out code
-- Leave debugging statements (console.log, print, etc.)
-- Create files unnecessarily (prefer editing existing)
-- Use overly complex solutions when simple ones work
-- Ignore linting errors or warnings
-- Skip error handling
-- Hardcode configuration values
-- Commit large binary files
-
-✅ **Do:**
-- Remove unused imports and variables
-- Handle edge cases and errors
-- Write self-documenting code
-- Keep functions small and focused
-- Use meaningful variable names
-- Add comments for complex logic
-- Update documentation when changing behavior
-- Consider performance implications
-
-### File Reference Format
-
-When discussing code locations, use this format:
-```
-src/components/UserProfile.jsx:45
-src/services/api-client.ts:123-145
+### Definition of Done
+- [ ] All tests passing (unit, integration, e2e)
+- [ ] Code review completed
+- [ ] Documentation updated
+- [ ] Performance impact assessed
+- [ ] Security implications reviewed
 ```
 
-This allows users to quickly navigate to specific code sections.
+#### Epic Issue Template
+```markdown
+### Epic: [Epic Title]
 
-### Decision Making
+### Overview
+[2-3 sentences describing the epic's goal and value]
 
-**When to ask for clarification:**
-- Multiple valid approaches exist
-- Requirements are ambiguous
-- Breaking changes are needed
-- Major architectural decisions required
-- Security implications are unclear
+### Business Value
+[Why this epic matters - impact on system/users]
 
-**When to proceed autonomously:**
-- Bug fixes with clear solutions
-- Following established patterns
-- Adding tests for existing code
-- Documentation improvements
-- Code style/formatting fixes
+### Child Issues
+<!-- MANDATORY: All child tasks MUST be listed here -->
+- [ ] #XXX - [First child task with test requirements]
+- [ ] #XXX - [Second child task with test requirements] 
+- [ ] #XXX - [Third child task with test requirements]
 
----
+### Success Criteria
+- [ ] [Measurable outcome with test verification]
+- [ ] [Performance target with benchmarks]
+- [ ] All child issues completed with full test coverage
+- [ ] End-to-end user workflow verified
 
-## Project-Specific Notes
+### Testing Strategy
+- [ ] Unit test coverage plan for all components
+- [ ] Integration testing approach for inter-component communication
+- [ ] E2E testing scenarios for complete user workflows
+- [ ] Performance testing benchmarks and targets
 
-### Environment Variables
-
-```env
-# Example environment variables (create .env file)
-NODE_ENV=development
-API_URL=http://localhost:3000
-DATABASE_URL=postgresql://localhost/stebeq
+### Dependencies
+[List any external dependencies or blockers]
 ```
 
-### Key Dependencies
+### Label System (MANDATORY)
+```
+Type Labels (Pick ONE):
+type: EPIC          - Epic (large multi-issue effort)
+type: child-issue   - Child issue within an Epic  
+type: bug           - Something isn't working
+type: enhancement   - New feature or request
+type: refactor      - Code improvements without behavior change
+type: test          - Test additions or improvements
+type: documentation - Improvements or additions to documentation
+type: chore         - Maintenance (deps, configs, cleanup)
+type: hotfix        - Emergency production fixes
 
-**To be populated as project develops:**
+Priority Labels (Pick ONE):
+priority: critical  - System-breaking, security issues
+priority: high      - Important for current phase
+priority: medium    - Nice to have, can be delayed
+priority: low       - Future consideration
 
-- List important libraries and their purposes
-- Note any unusual or complex dependencies
-- Document version constraints
-
-### Known Issues
-
-**To be populated as issues are discovered:**
-
-- Document workarounds for known issues
-- Link to GitHub issues for tracking
-- Note any technical debt
-
-### Performance Considerations
-
-**To be populated based on project needs:**
-
-- Database query optimization strategies
-- Caching strategies
-- Bundle size considerations
-- API rate limiting
-
----
-
-## Resources
-
-### Documentation Links
-
-- **Project Docs**: (to be added)
-- **API Reference**: (to be added)
-- **Architecture Docs**: (to be added)
-
-### External Resources
-
-- [Git Conventional Commits](https://www.conventionalcommits.org/)
-- [Semantic Versioning](https://semver.org/)
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+Test Labels (Auto-applied by CI):
+tests: unit         - Unit test coverage added
+tests: integration  - Integration test coverage added  
+tests: e2e          - End-to-end test coverage added
+tests: performance  - Performance test coverage added
+```
 
 ---
 
-## Maintenance
+## RED FLAGS - STOP IMMEDIATELY
 
-This CLAUDE.md file should be updated when:
-
-- Project structure changes significantly
-- New conventions are established
-- Technology stack changes
-- Development workflow changes
-- New common tasks are identified
-
-**Maintainers**: Update the "Last Updated" date at the top of this file when making changes.
-
----
-
-## Questions or Issues?
-
-If you encounter issues or have questions not covered in this guide:
-
-1. Check the project README.md
-2. Search existing GitHub issues
-3. Ask the project maintainers
-4. Create a new issue with the `question` label
+```
+❌ Missing [branch: ... | issue: #... | status: ...] after 3+ responses
+❌ No tests written before implementation code
+❌ Test coverage below 95% for new code
+❌ No commits after multiple code changes
+❌ Working without issue reference number
+❌ Implementing BEFORE writing failing tests (TDD violation)
+❌ Completed issue but didn't update PROGRESS.md + CONTINUATION.md
+❌ Starting session without reading CONTINUATION.md first
+❌ Making architectural decisions without consultation
+❌ Committing secrets, API keys, or sensitive data
+❌ Force pushing to shared branches
+❌ Changing project-wide standards without explicit approval
+❌ Skipping integration tests for component interactions
+❌ Mocking real dependencies in integration tests
+❌ Missing performance impact assessment for changes
+❌ No security review for authentication/authorization changes
+```
 
 ---
 
-*This document is a living guide and should evolve with the project.*
+## ERROR RECOVERY & TROUBLESHOOTING
+
+### When Confused
+- State what you understand
+- State what's unclear  
+- Ask specific question
+- Don't guess or assume
+
+### When Wrong
+- State what you did
+- State what was expected
+- Show the difference
+- **Suggest solution for immediate fix**
+- **Update documentation to prevent future occurrence**
+- **Add tests to prevent regression**
+- Ask for next action
+
+### When Blocked
+- State the blocker with context
+- Show error/issue with full details
+- Suggest multiple solutions with trade-offs
+- Ask for preference and reasoning
+
+### When Tests Fail
+- **NEVER skip or ignore failing tests**
+- Analyze failure root cause
+- Fix the code, not the test (unless test is wrong)
+- Verify fix doesn't break other tests
+- Document the fix for future reference
+
+---
+
+## QUALITY ASSURANCE (ENTERPRISE LEVEL)
+
+### Code Quality Gates (Pre-Commit)
+```
+✅ All tests passing (unit, integration, e2e)
+✅ Code coverage ≥ 95% for new code
+✅ Performance benchmarks within acceptable range
+✅ Security scan passing (SAST, dependency check)
+✅ Code formatted and linted
+✅ Documentation updated for significant changes
+✅ No debug code or temporary hacks
+✅ API contracts maintained (no breaking changes)
+```
+
+### AI-Assisted Code Review Process
+```
+1. AI conducts systematic code review
+2. AI identifies potential issues and improvements
+3. AI presents findings with specific recommendations
+4. AI verifies test coverage and quality
+5. Human confirms next steps and priorities
+6. Address critical issues before proceeding
+7. Document patterns and standards for consistency
+```
+
+### Performance Monitoring
+```
+✅ Key performance metrics identified and measured
+✅ Automated performance testing in CI/CD
+✅ Performance regression alerts configured
+✅ Load testing for critical user workflows
+✅ Memory and resource usage monitoring
+```
+
+---
+
+## SCALING PREPARATION
+
+### Solo → Team Transition Readiness
+```
+Documentation completeness for knowledge transfer
+Code review processes established
+Testing standards documented and automated
+CI/CD pipeline robust and reliable
+Performance monitoring and alerting configured
+Security policies documented and enforced
+```
+
+### Team Collaboration Framework (Future)
+```
+Code review assignment and rotation
+Pair programming protocols
+Knowledge sharing sessions
+Technical decision documentation
+Conflict resolution procedures
+Onboarding automation
+```
+
+---
+
+**Framework Version**: Universal v2.1 Enterprise  
+**Solo Development Optimized**: Enterprise-grade standards for single developer  
+**TDD Enforcement**: Test-driven development mandatory at all levels  
+**Scaling Ready**: Prepared for team collaboration evolution
