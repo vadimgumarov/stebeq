@@ -26,7 +26,7 @@ dist/
 build/
 *.egg-info/
 .next/
-out/
+# out/    # Keep static export for GitHub Pages
 
 # Environment variables
 .env
