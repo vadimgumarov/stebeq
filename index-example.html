@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideCareTogether - Share Rides. Share Stories. Support Causes.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f5f3f0;
+            --bg-secondary: #e8e5df;
+            --bg-card: #fdfcfa;
+            --text-primary: #3a3a3a;
+            --text-secondary: #6b6b6b;
+            --accent-primary: #9db4ab;
+            --accent-secondary: #b8a99d;
+            --accent-tertiary: #d4b5a8;
+            --border-color: #d4cdc6;
+            --shadow: rgba(97, 97, 97, 0.1);
+            --link-color: #7a9d8f;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #2a2a2a;
+            --bg-secondary: #353535;
+            --bg-card: #3a3a3a;
+            --text-primary: #e8e5df;
+            --text-secondary: #b8b5af;
+            --accent-primary: #7a9d8f;
+            --accent-secondary: #9d8b7a;
+            --accent-tertiary: #a88b7d;
+            --border-color: #4a4a4a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --link-color: #9db4ab;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+            transition: background-color 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-primary);
+        }
+
+        .theme-toggle {
+            background: var(--accent-primary);
+            border: none;
+            color: var(--bg-card);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--accent-secondary);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 120px 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--accent-primary);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-secondary);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: var(--bg-card);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--accent-primary);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-card);
+            transform: translateY(-2px);
+        }
+
+        .problem-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .crisis-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .crisis-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .crisis-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-tertiary);
+            margin-bottom: 15px;
+        }
+
+        .crisis-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-primary);
+            margin-bottom: 15px;
+        }
+
+        .solution-section {
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .how-it-works {
+            background-color: var(--bg-secondary);
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step {
+            background-color: var(--bg-card);
+            padding: 60px 30px 30px 30px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px var(--shadow);
+            margin-top: 30px;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-primary);
+            color: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px var(--shadow);
+            z-index: 10;
+        }
+
+        .step .feature-icon {
+            font-size: 2.5rem;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .impact-section {
+            text-align: center;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            padding: 40px;
+            border-radius: 15px;
+            color: var(--bg-card);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .founder-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .founder-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .quote-author {
+            text-align: right;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .testimonials {
+            background-color: var(--bg-primary);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-primary);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .waitlist-section {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-card);
+            text-align: center;
+        }
+
+        .waitlist-section h2 {
+            color: var(--bg-card);
+        }
+
+        .waitlist-form {
+            max-width: 500px;
+            margin: 50px auto 0;
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .ab-testing {
+            background-color: var(--bg-secondary);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--accent-primary);
+            color: var(--bg-card);
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            .hero {
+                padding: 80px 0;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .waitlist-form {
+                padding: 30px 20px;
+            }
+        }
+
+        .two-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--accent-primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button-card:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-card);
+            transform: translateY(-5px);
+        }
+
+        .button-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, var(--accent-tertiary) 0%, var(--accent-tertiary) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 80%;
+            padding: 0 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">RideCareTogether</div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span id="themeIcon">☾</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Share Rides. Share Stories. Support Causes.</h1>
+            <p class="subtitle">The world's first <span class="highlight">donation-powered airport carpooling app</span> that turns travel into community building.</p>
+            <div class="cta-buttons">
+                <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+                <a href="#how-it-works" class="btn btn-secondary">Watch the 60-Second Video</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <h2>Three Crises, One Simple Solution.</h2>
+            <div class="crisis-grid">
+                <div class="crisis-card">
+                    <div class="crisis-number">1</div>
+                    <div class="crisis-title">Loneliness is a Public Health Epidemic.</div>
+                    <p>The US Surgeon General reports isolation is as harmful as smoking 15 cigarettes a day.</p>
+                </div>
+                <div class="crisis-card">
+                    <div class="crisis-number">2</div>
+                    <div class="crisis-title">Airport Rides Are Expensive.</div>
+                    <p>$50–$80 for a 30-minute trip is the norm—surge pricing makes it worse.</p>
+                </div>
+                <div class="crisis-card">
+                    <div class="crisis-number">3</div>
+                    <div class="crisis-title">Communities Are Disconnected.</div>
+                    <p>84% of Americans say they feel no connection to their neighborhoods or cities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution-section">
+        <div class="container">
+            <h2>Purposeful Mobility: Travel That Gives Back.</h2>
+            <p class="subtitle">RideCareTogether matches travelers heading in the same direction after landing. Instead of paying the driver, you donate to a cause you believe in.</p>
+            
+            <h3>Two Buttons. Infinite Impact.</h3>
+            <div class="two-buttons">
+                <div class="button-card">
+                    <div class="button-title">I'm Driving</div>
+                    <p>Share your route, meet new people, support a charity.</p>
+                </div>
+                <div class="button-card">
+                    <div class="button-title">I Need a Ride</div>
+                    <p>Find a ride, donate, and build a connection.</p>
+                </div>
+            </div>
+
+            <p class="subtitle">No money exchanged between users. Only verified donations through trusted charities.</p>
+            
+            <div class="cta-buttons">
+                <a href="#waitlist" class="btn btn-primary">Be Part of the Movement</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Select Your Route</h3>
+                    <p>Choose your airport and destination.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Choose a Cause</h3>
+                    <p>Select a charity or cause to support.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Matched</h3>
+                    <p>Connect with a traveler on the same route.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Share & Impact</h3>
+                    <p>Share the ride, share the story, see your donation impact.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 60px; text-align: center;">Key Features</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Instant Matching</h3>
+                    <p>Based on flight time and destination.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>1.5M+ Charities</h3>
+                    <p>Integrated via secure API.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Real-Time Safety</h3>
+                    <p>Tracking and verified IDs.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Transparent Donations</h3>
+                    <p>Clear donation receipts.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Impact Dashboard</h3>
+                    <p>Track your community impact.</p>
+                </div>
+            </div>
+
+            <div class="cta-buttons" style="margin-top: 50px;">
+                <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <div class="container">
+            <h2>Every Ride Creates Ripples of Good.</h2>
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <div class="stat-number">$50M+</div>
+                    <p>Projected charitable donations by Year 3.</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2.3M</div>
+                    <p>Fewer solo car trips → 15,000 tons of CO₂ saved.</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3.2</div>
+                    <p>New human connections per user per year.</p>
+                </div>
+            </div>
+            <p class="subtitle" style="margin-top: 50px; font-size: 1.5rem;">Together, we're not just moving people — we're moving humanity forward.</p>
+            <div class="cta-buttons">
+                <a href="#waitlist" class="btn btn-primary">Ride with Purpose</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="founder-section">
+        <div class="container">
+            <h2>Why We Built RideCareTogether</h2>
+            <div class="founder-content">
+                <p class="quote">"After landing in cities across the world, I noticed the same thing — strangers sitting silently in cars, each paying too much to stay disconnected. What if one ride could change that? RideCareTogether was born from the belief that technology should bring people closer, not drive them apart."</p>
+                <p class="quote-author">— [Founder Name], Creator of RideCareTogether</p>
+            </div>
+            <div class="cta-buttons" style="margin-top: 40px;">
+                <a href="#" class="btn btn-secondary">Read Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Early Voices</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I met my new business partner on a RideCareTogether trip."</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The best $20 I ever donated — a great ride and a new friend."</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"It feels good to know your trip supports something real."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ab-testing">
+        <div class="container">
+            <h2>Optional Add-Ons (A/B Testing Ideas)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variation</th>
+                            <th>Test Focus</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>A</td>
+                            <td>Emotional storytelling</td>
+                            <td>Founder's video higher on page</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>Social proof</td>
+                            <td>Insert partner charity logos near hero section</td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>Simplicity</td>
+                            <td>Shorter headline: "Rides That Give Back."</td>
+                        </tr>
+                        <tr>
+                            <td>D</td>
+                            <td>Impact data first</td>
+                            <td>Replace hero with live donation counter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="waitlist-section" id="waitlist">
+        <div class="container">
+            <h2>Be the First to Ride With Purpose.</h2>
+            <p class="subtitle">Sign up today to get early access, updates, and exclusive launch rewards. Together, we'll prove that connection and generosity can share the same road.</p>
+            
+            <div class="waitlist-form">
+                <form id="waitlistForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>I'm interested in:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="drive" name="interest" value="drive">
+                                <label for="drive">I'd like to drive.</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ride" name="interest" value="ride">
+                                <label for="ride">I'd like to ride.</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="both" name="interest" value="both">
+                                <label for="both">Both.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Join Waitlist</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>RideCareTogether™ is a community mobility initiative redefining travel through donation and human connection.</p>
+            <p style="margin-top: 20px;">© 2025 RideCareTogether, All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const themeIcon = document.getElementById('themeIcon');
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀';
+            } else {
+                themeIcon.textContent = '☾';
+            }
+        }
+
+        document.getElementById('waitlistForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for joining the waitlist! We\'ll be in touch soon.');
+            e.target.reset();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
