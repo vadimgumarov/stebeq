@@ -1,0 +1,572 @@
+# STEBEQ - AI Workflow Automation Platform
+
+> **Claude Code Integration**: This file provides project-specific context and configuration that supplements the universal development framework defined in CLAUDE.md.
+
+---
+
+## PROJECT CONFIGURATION
+
+### Project Identity
+```yaml
+PROJECT_NAME: "STEBEQ"
+PROJECT_TYPE: "web"
+REPOSITORY: "https://github.com/[username]/STEBEQ"
+MAIN_LANGUAGE: "TypeScript"
+FRAMEWORK: "Next.js 14+ (React)"
+DATABASE: "PostgreSQL (Phase 2 - SaaS platform)"
+DEPLOYMENT: "Vercel"
+VERSION: "0.1.0-alpha"
+TEAM_SIZE: "solo"
+TESTING_LEVEL: "enterprise"
+```
+
+### Technology Stack
+```yaml
+Runtime: "Node.js 18+"
+Package Manager: "npm"
+Build Tool: "Next.js built-in (Turbopack/Webpack)"
+Test Framework: "Jest + React Testing Library (unit), Playwright (E2E)"
+Linting: "ESLint with Next.js config"
+Formatting: "Prettier"
+CI/CD: "GitHub Actions + Vercel auto-deploy"
+```
+
+---
+
+## CRITICAL SAFETY RULES
+
+### Session Start Protocol (MANDATORY)
+1. **ALWAYS read docs/CONTINUATION.md FIRST** - Get current state and next steps
+2. **Read CLAUDE.md** - Understand process rules and workflows
+3. **Read this file (.claude_project)** - Get project context
+4. **State current context** - [branch: ... | issue: #... | status: ...]
+5. **Proceed with TDD workflow** - Tests first, then implementation
+
+### Project-Specific Data Integrity
+
+**Critical Business Rules:**
+```
+- NEVER implement employee monitoring features - only workflow pattern observation
+- NEVER store personally identifiable data without explicit consent
+- All AI observations must be transparent and accessible to users
+- Default to anonymous data collection - privacy by design
+- No third-party analytics without user consent (privacy-first approach)
+```
+
+### Safety Defaults
+```
+- Default to development environment (not production)
+- Default to static site generation (SSG) for performance
+- Default to client-side rendering for sensitive data only
+- Run type checking before every commit
+- Run full test suite before any production deployment
+```
+
+### Documentation Enforcement (MANDATORY)
+- **PROGRESS.md** - MUST update when completing any issue
+- **CONTINUATION.md** - MUST update when switching tasks or completing work
+- **Both files** - MUST be updated before committing with "Complete Issue #" or "Closes #"
+- **State tracking** - MUST include [branch: ... | issue: #... | status: ...] in every response
+
+### STRICTLY PROHIBITED APPROACHES - NO EXCEPTIONS
+**Always fix the root problem. These workarounds are NEVER acceptable:**
+- ❌ **Switching ports/URLs** - Fix the blocking issue, don't change ports
+- ❌ **Mocking real components** - Fix the import/dependency, don't mock
+- ❌ **Hardcoding values** - Fix the config/system, don't hardcode
+- ❌ **Skipping tests** - Fix the failing code, don't skip tests
+- ❌ **Commenting out code** - Debug and fix, don't comment out
+- ❌ **Creating "simplified" versions** - Fix the full system
+- ❌ **Workarounds instead of fixes** - Fix the root cause
+- ❌ **Using client-side only when SSG/SSR is appropriate** - Fix data fetching
+
+See CLAUDE.md "RED FLAGS" section for full details.
+
+---
+
+## ARCHITECTURE PRINCIPLES
+
+### Core Architectural Rule
+
+**"Performance-First, Privacy-First, Progressive Enhancement"**
+
+STEBEQ is built on three pillars:
+1. **Performance**: <50kb initial load, static generation where possible
+2. **Privacy**: No tracking, transparent data collection, user control
+3. **Progressive**: Start minimal (landing), scale to full SaaS platform
+
+**✅ Correct Pattern**:
+- Static generation for marketing pages
+- API routes for backend logic
+- Component composition for reusability
+- Server components by default, client components when interactive
+
+**❌ Prohibited Pattern**:
+- Heavy client-side frameworks for static content
+- Multiple separate apps when Next.js can handle both
+- Unnecessary JavaScript for static content
+- Any user tracking or analytics without explicit consent
+
+### Project Structure (v0.1.0-alpha)
+
+```
+STEBEQ/
+├── src/
+│   ├── app/                        # Next.js 14 App Router
+│   │   ├── (marketing)/           # Landing pages group
+│   │   │   ├── page.tsx           # Homepage
+│   │   │   ├── how-it-works/      # How it works page
+│   │   │   ├── pricing/           # Pricing page
+│   │   │   └── contact/           # Contact page
+│   │   ├── api/                   # API routes
+│   │   │   └── contact/           # Contact form handler
+│   │   ├── layout.tsx             # Root layout
+│   │   └── globals.css            # Global styles
+│   ├── components/                 # React components
+│   │   ├── ui/                    # Reusable UI components
+│   │   ├── layout/                # Layout components (Header, Footer)
+│   │   └── forms/                 # Form components
+│   ├── lib/                       # Utilities and helpers
+│   │   ├── utils.ts               # General utilities
+│   │   └── validations.ts         # Form validations
+│   └── styles/                    # Additional styles
+├── public/                         # Static assets
+│   ├── fonts/                     # Inter font files (if self-hosted)
+│   └── images/                    # Optimized images (minimal)
+├── tests/                          # COMPREHENSIVE TEST SUITE (Enterprise Level)
+│   ├── unit/                      # Unit tests (95%+ coverage target)
+│   │   ├── components/            # Component tests
+│   │   ├── lib/                   # Utility function tests
+│   │   └── fixtures/              # Test data and mocks
+│   ├── integration/                # Integration tests with real dependencies
+│   │   ├── api/                   # API route tests
+│   │   └── pages/                 # Page integration tests
+│   ├── e2e/                       # End-to-end user workflows (Playwright)
+│   │   ├── user-journeys/         # Complete user flows
+│   │   └── performance/           # Performance and lighthouse tests
+│   └── visual/                    # Visual regression tests (optional)
+├── docs/                           # PROJECT DOCUMENTATION
+│   ├── PROGRESS.md                 # Active progress tracking (read by Claude)
+│   ├── CONTINUATION.md             # Session state (READ FIRST)
+│   ├── ISSUES.md                   # Problem/solution log
+│   ├── architecture/               # Architecture decisions
+│   ├── api/                       # API documentation (Phase 2)
+│   └── deployment/                # Deployment guides
+├── scripts/                        # UTILITY & AUTOMATION SCRIPTS
+│   ├── setup-dev.sh               # Development environment setup
+│   └── test-all.sh                # Run all test suites
+├── .github/                        # GitHub configuration
+│   └── workflows/                 # CI/CD workflows
+├── CLAUDE.md                       # Universal development framework
+├── .claude_project                 # This file - project context
+├── .gitignore                      # Git ignore rules
+├── package.json                    # Dependencies and scripts
+├── tsconfig.json                   # TypeScript configuration
+├── next.config.js                  # Next.js configuration
+├── tailwind.config.ts              # Tailwind CSS configuration
+├── jest.config.js                  # Jest test configuration
+├── playwright.config.ts            # Playwright E2E configuration
+└── .env.example                    # Environment variables template
+```
+
+### Clean Separation (ARCHITECTURAL BOUNDARIES)
+```
+- Marketing Site (Phase 1): Static-generated pages, minimal JS, <50kb
+- SaaS Platform (Phase 2): Server-side auth, API routes, PostgreSQL
+- Shared Components: UI library used across both phases
+- No duplication: Single source of truth for design system and utilities
+- API Layer: Clear separation between frontend and backend logic
+```
+
+---
+
+## DEVELOPMENT WORKFLOW
+
+### Primary Development Process
+
+**Next.js Development Server:**
+```
+Standard development workflow using Next.js built-in dev server with hot module replacement and fast refresh for rapid iteration.
+```
+
+### Command Structure & Scripts
+
+#### Development Commands
+```bash
+# Start development server
+npm run dev
+# Runs on http://localhost:3000 with hot reload
+
+# Build for production (static export)
+npm run build
+
+# Preview production build locally
+npm run start
+
+# Type checking
+npm run type-check
+# Runs TypeScript compiler in no-emit mode
+```
+
+#### Testing Commands (Enterprise TDD)
+```bash
+# Unit tests (fast, run before every commit)
+npm test
+# Runs Jest with coverage report
+
+# Unit tests in watch mode (during development)
+npm run test:watch
+
+# Integration tests (with Next.js test environment)
+npm run test:integration
+
+# End-to-end tests (complete workflows)
+npm run test:e2e
+# Runs Playwright tests
+
+# Full test suite with coverage
+npm run test:all
+# Runs unit, integration, and E2E tests
+
+# Performance testing (Lighthouse)
+npm run test:perf
+# Runs Lighthouse CI for performance benchmarks
+```
+
+#### Quality Assurance Commands
+```bash
+# Code formatting
+npm run format
+# Runs Prettier on all files
+
+# Linting
+npm run lint
+# Runs ESLint with Next.js configuration
+
+# Security scanning
+npm audit
+# Checks for security vulnerabilities
+
+# Dependency updates
+npm outdated
+# Shows outdated packages
+```
+
+---
+
+## CONFIGURATION MANAGEMENT
+
+### Environment Variables
+
+```bash
+# Development Environment (default)
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NODE_ENV=development
+
+# Testing Environment
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NODE_ENV=test
+
+# Production Environment
+NEXT_PUBLIC_SITE_URL=https://stebeq.com
+NODE_ENV=production
+
+# Phase 2 - SaaS Platform (Future)
+DATABASE_URL=postgresql://...
+NEXTAUTH_URL=https://stebeq.com
+NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+```
+
+### Configuration Files
+```
+- package.json: Dependencies, scripts, project metadata
+- next.config.js: Next.js build and runtime configuration
+- tsconfig.json: TypeScript compiler options
+- tailwind.config.ts: Design system configuration (colors, typography, spacing)
+- jest.config.js: Unit test framework configuration
+- playwright.config.ts: E2E test configuration
+- .env.example: Environment variable template
+- .eslintrc.json: Code quality rules
+- .prettierrc: Code formatting rules
+```
+
+---
+
+## WEB APPLICATION ARCHITECTURE
+
+### Next.js App Router Architecture
+```
+Request Flow (Static Pages - Phase 1):
+User → Vercel Edge Network → Static HTML/CSS/JS → Client Hydration → Interactive
+
+Request Flow (Dynamic Features - Phase 2):
+User → Next.js Server → API Route → Database → JSON Response → Client Update
+
+Example Route:
+/how-it-works
+├── Layout (app/layout.tsx)
+├── Marketing Layout (app/(marketing)/layout.tsx)
+├── Page Component (app/(marketing)/how-it-works/page.tsx)
+└── Static Generation at Build Time (SSG)
+```
+
+### Component Architecture
+```
+Component Hierarchy:
+Layout (Root)
+  ├── Header (Fixed navigation)
+  ├── Main Content (Page-specific)
+  │   ├── Hero Section
+  │   ├── Content Sections
+  │   └── CTA Components
+  └── Footer (Minimal)
+
+Design System:
+- Typography: Inter font (Light, Regular weights)
+- Colors: Black, Gray, Ocean Blue accent
+- Spacing: Consistent 8px grid system
+- Components: Minimal, reusable, accessible
+```
+
+### Contact Form Integration
+```
+Contact Form Flow:
+Client Form → Client Validation → API Route (/api/contact)
+                                      ↓
+                           Email Service (SendGrid/Resend)
+                                      ↓
+                           Success/Error Response → UI Feedback
+```
+
+---
+
+## DATA & STATE MANAGEMENT
+
+### Phase 1 - Landing Site (Current)
+```
+- State Management: React hooks (useState, useEffect) for form states
+- Form Validation: Zod schema validation
+- No database required
+- Contact form: Email via API route
+```
+
+### Phase 2 - SaaS Platform (Future)
+```
+- Primary Database: PostgreSQL 15+ (Vercel Postgres or Railway)
+- ORM: Prisma for type-safe database access
+- Schema Versioning: Prisma migrations
+- State Management: React Server Components + client state for UI only
+- Server State: Direct database queries in server components
+- Client State: Zustand or React Context for UI state
+```
+
+---
+
+## DEPLOYMENT & OPERATIONS
+
+### Development Environment
+```bash
+# Setup development environment
+npm install
+npm run dev
+
+# Development runs on:
+http://localhost:3000
+```
+
+### Production Environment (Vercel)
+```bash
+# Automatic deployment via GitHub integration
+git push origin main
+# Vercel auto-deploys on push to main
+
+# Manual deployment (if needed)
+vercel --prod
+
+# Health check
+curl -f https://stebeq.com || exit 1
+```
+
+### Service URLs & Endpoints
+```
+Development:
+- Frontend: http://localhost:3000
+- API Routes: http://localhost:3000/api/*
+
+Preview (Vercel):
+- Preview URL: https://stebeq-[hash].vercel.app (auto-generated per PR)
+
+Production:
+- Frontend: https://stebeq.com
+- API Routes: https://stebeq.com/api/*
+```
+
+---
+
+## TESTING STRATEGY (ENTERPRISE TDD)
+
+### TDD Workflow Implementation
+```
+1. Write Failing Test:
+   - npm run test:watch [specific_test_file]
+   - Verify test fails for the right reason
+
+2. Write Minimal Implementation:
+   - Code just enough to make test pass
+   - No premature optimization
+
+3. Refactor Safely:
+   - Improve code while keeping tests green
+   - Run full test suite after refactoring: npm test
+
+4. Integration Testing:
+   - Test component interactions with Next.js test environment
+   - Use real API routes, not mocks
+
+5. End-to-End Testing:
+   - Test complete user workflows with Playwright
+   - Verify business value delivery (contact form submission, page navigation)
+```
+
+### Test Data Management
+```
+- Test Fixtures: Reusable test data in tests/unit/fixtures/
+- Component Mocks: Mock only external services (email), not internal components
+- Cleanup Strategy: Jest automatically cleans up after each test
+- Isolation: Each test is independent and can run in any order
+```
+
+### Performance & Load Testing
+```
+- Performance Targets: <50kb initial load, First Contentful Paint < 1.5s
+- Tools: Lighthouse CI for automated performance testing
+- Monitoring: Vercel Analytics (privacy-friendly, GDPR compliant)
+- Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- Regression Testing: Automated Lighthouse checks in CI/CD
+- Alerts: Vercel deployment checks for performance degradation
+```
+
+---
+
+## SECURITY & COMPLIANCE
+
+### Security Requirements
+```
+- Authentication: NextAuth.js with OAuth2 (Phase 2)
+- Authorization: Session-based with JWT tokens (Phase 2)
+- Data Encryption: HTTPS only (enforced by Vercel), no sensitive client storage
+- Security Scanning: npm audit in CI/CD, Dependabot for dependency updates
+- CSP Headers: Strict Content Security Policy configured in next.config.js
+- Environment Variables: Never commit .env files, use Vercel environment variables
+```
+
+### Compliance & Auditing
+```
+- Standards: GDPR compliance (EU users), privacy-first design
+- Audit Logging: Contact form submissions logged (Phase 2 - with consent)
+- Data Privacy: No cookies except essential, no third-party tracking
+- Monitoring: Server-side logging only (Vercel logs), no client-side tracking
+- User Rights: Right to deletion, data export (implement in Phase 2)
+```
+
+---
+
+## MONITORING & OBSERVABILITY
+
+### Application Monitoring
+```
+- APM: Vercel Analytics (privacy-friendly, no cookies)
+- Logs: Vercel function logs for API routes
+- Metrics: Build times, response times, error rates
+- Alerts: Vercel deployment notifications via email/Slack
+```
+
+### Error Tracking & Debugging
+```
+- Error Tracking: Console errors in development, Vercel logs in production
+- Debug Tools: React DevTools, Next.js built-in error overlay
+- Error Recovery: Error boundaries for graceful degradation
+- User Impact: Monitor form submission success rates
+```
+
+---
+
+## CURRENT PROJECT STATUS
+
+### Phase 1 - Landing Site (In Progress)
+```
+Current Work:
+- Issue #1: Project initialization and configuration setup
+- Status: Setting up development environment
+- Progress: Tech stack selected, project structure planned
+- Blockers: None
+- Next: Initialize Next.js project with TypeScript and Tailwind CSS
+
+Recent Accomplishments:
+- ✅ Tech stack decision (Next.js, TypeScript, TailwindCSS)
+- ✅ .gitignore configured for project
+- ✅ .claude_project configured with full project context
+```
+
+### Component Status
+```
+📋 Planned (Phase 1 - Landing Site):
+- Homepage: Minimal hero, problem/solution, results, CTA
+- How It Works: 4-week transformation breakdown
+- Pricing: 3-tier pricing (Starter, Growth, Enterprise)
+- Contact: Simple contact form with email integration
+- Shared: Header navigation, footer, typography system
+
+📋 Planned (Phase 2 - SaaS Platform):
+- Authentication: User registration, login, OAuth
+- Dashboard: Workflow observation dashboard
+- Integrations: Connect to user's existing tools
+- Analytics: Anonymized workflow pattern visualization
+- Admin: Customer management, billing integration
+```
+
+### Quality Metrics
+```
+Code Quality:
+- Test Coverage: Target 95%+ (to be established)
+- Type Safety: 100% TypeScript strict mode
+- Technical Debt: Zero (greenfield project)
+- Security Score: No vulnerabilities (maintain with npm audit)
+
+Performance:
+- Page Load Target: <50kb initial bundle
+- First Contentful Paint: <1.5s
+- Lighthouse Score Target: 95+ (Performance, Accessibility, Best Practices, SEO)
+- Core Web Vitals: All metrics in "Good" range
+```
+
+---
+
+## CUSTOMIZATION CHECKLIST
+
+### ✅ COMPLETED:
+- [x] **Project title and description** - STEBEQ AI Workflow Automation Platform
+- [x] **Project configuration** - Next.js 14+, TypeScript, TailwindCSS
+- [x] **Data integrity rules** - Privacy-first, no monitoring, transparent AI
+- [x] **Safety defaults** - Development mode, SSG for performance
+- [x] **Core architectural principle** - Performance-First, Privacy-First, Progressive
+- [x] **Project structure** - Next.js App Router structure defined
+- [x] **Development commands** - npm scripts for dev/build/test
+- [x] **Testing commands** - Jest, Playwright configuration planned
+- [x] **Environment variables** - Development and production URLs
+- [x] **Service URLs** - Localhost dev, Vercel production
+- [x] **Current status** - Phase 1 in progress, initialization stage
+
+### 📋 TO BE DONE:
+- [ ] Create GitHub repository and push initial code
+- [ ] Initialize Next.js project with configuration
+- [ ] Set up CI/CD pipeline (GitHub Actions)
+- [ ] Configure Vercel deployment
+- [ ] Implement design system components
+- [ ] Build landing pages (homepage, how-it-works, pricing, contact)
+
+---
+
+**Configuration Version**: STEBEQ v0.1.0-alpha
+**TDD Integration**: Enterprise test-driven development configured
+**Solo Development**: Optimized for single developer (Vadim Gumarov)
+**Claude Code Ready**: Fully compatible with Claude Code workflows and conventions
