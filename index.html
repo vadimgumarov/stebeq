@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transform repetitive tasks into human creativity. Give your team 3+ hours back every day with transparent AI that observes patterns, not people.">
+    <meta name="keywords" content="workflow automation, AI automation, productivity, business efficiency, transparent AI">
+    <title>STEBEQ - Transparent AI Workflow Automation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #9db4ab;
+            --secondary: #b8a99d;
+            --tertiary: #d4b5a8;
+            --bg-primary: #f5f3f0;
+            --bg-secondary: #e8e5df;
+            --bg-card: #fdfcfa;
+            --text-primary: #3a3a3a;
+            --text-secondary: #6b6b6b;
+            --border-color: #d4cdc6;
+            --shadow: rgba(97, 97, 97, 0.1);
+            --shadow-hover: rgba(97, 97, 97, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --primary: #7a9d8f;
+            --secondary: #9d8b7a;
+            --tertiary: #a88b7d;
+            --bg-primary: #2a2a2a;
+            --bg-secondary: #353535;
+            --bg-card: #3a3a3a;
+            --text-primary: #e8e5df;
+            --text-secondary: #b8b5af;
+            --border-color: #4a4a4a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-card);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+            transition: background-color 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--primary);
+            border: none;
+            color: var(--bg-card);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .card-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .problem-section {
+            background: var(--bg-secondary);
+        }
+
+        .problem-section .card-number:nth-child(1) { color: var(--tertiary); }
+
+        /* Solution Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0 60px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .step-card:nth-child(1) .step-number { background: var(--tertiary); }
+        .step-card:nth-child(2) .step-number { background: var(--secondary); }
+        .step-card:nth-child(3) .step-number { background: var(--primary); }
+
+        /* Differentiators */
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .diff-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .diff-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .diff-card h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .diff-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Industry Cards */
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0 60px;
+        }
+
+        .industry-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+            border-top: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .industry-card:nth-child(2) { border-top-color: var(--secondary); }
+        .industry-card:nth-child(3) { border-top-color: var(--tertiary); }
+
+        .industry-stat {
+            margin: 15px 0;
+        }
+
+        .industry-stat strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .industry-stat .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .industry-benefits {
+            margin-top: 20px;
+        }
+
+        .industry-benefits div {
+            display: flex;
+            align-items: start;
+            margin: 8px 0;
+        }
+
+        .industry-benefits span {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        /* Form */
+        .form-section {
+            background: var(--bg-primary);
+        }
+
+        .form-container {
+            background: var(--bg-card);
+            max-width: 700px;
+            margin: 40px auto 0;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            margin: 20px 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .form-group.two-col {
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            display: grid;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .privacy-note {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand .tagline {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: block;
+            margin: 8px 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Transformation Statement */
+        .transformation {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .transformation strong {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+
+            .hero { padding: 80px 0; }
+            section { padding: 60px 0; }
+
+            .card-grid,
+            .steps-grid,
+            .diff-grid,
+            .stats-grid,
+            .industry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-group.two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+
+        /* Smooth transitions */
+        * {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">STEBEQ</div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span id="themeIcon">☾</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>When Everybody Speaks — We Listen</h1>
+            <p class="subtitle">Transform repetitive tasks into human creativity. Give your team 3+ hours back every day.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Book a Demo</a>
+                <a href="#automation" class="btn btn-secondary">Calculate Your ROI</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <h2>68% of Work is Repetitive</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-number" style="color: var(--tertiary);">1</div>
+                    <h3 style="color: var(--primary);">Lost Human Potential</h3>
+                    <p>3.5 hours per day per employee trapped in mechanical loops. That's $75,000 annually in lost productivity per person.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number" style="color: var(--primary);">2</div>
+                    <h3 style="color: var(--primary);">Innovation Stagnation</h3>
+                    <p>Teams spend time executing tasks instead of creating solutions. The best ideas never surface.</p>
+                </div>
+                <div class="card">
+                    <div class="card-number" style="color: var(--secondary);">3</div>
+                    <h3 style="color: var(--primary);">Quiet Resignation</h3>
+                    <p>Talented people leave because meaningful work gets buried under repetitive workflows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section>
+        <div class="container">
+            <h2>Transparent AI That Liberates, Not Monitors</h2>
+            <p class="subtitle" style="text-align: center;">STEBEQ observes workflow patterns—not people. In three weeks, we identify repetitive tasks, design intelligent automations, and give your team time back for what only humans can do: innovate, create, inspire.</p>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 style="color: var(--primary);">Capture Rhythm</h3>
+                    <p>Anonymous surveys + transparent pattern observation. No surveillance. Just understanding.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 style="color: var(--primary);">Create Harmony</h3>
+                    <p>AI identifies automation opportunities. Custom solutions designed for your workflows.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 style="color: var(--primary);">Cultivate Genius</h3>
+                    <p>Automations deployed. Time freed. Innovation unleashed.</p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin-bottom: 30px;">Key Differentiators</h3>
+            <div class="diff-grid">
+                <div class="diff-card">
+                    <h4>Observe Patterns, Not People</h4>
+                    <p>We analyze workflows, never individuals.</p>
+                </div>
+                <div class="diff-card">
+                    <h4>Transparent Operations</h4>
+                    <p>Employees see everything we do.</p>
+                </div>
+                <div class="diff-card">
+                    <h4>No Employee Monitoring</h4>
+                    <p>Zero surveillance or tracking.</p>
+                </div>
+                <div class="diff-card">
+                    <h4>Value-Based Pricing</h4>
+                    <p>Custom pricing for your needs.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#contact" class="btn btn-primary">See How It Works → Book Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Automation Examples -->
+    <section id="automation" class="problem-section">
+        <div class="container">
+            <h2>What Gets Automated</h2>
+
+            <div class="card" style="max-width: 800px; margin: 40px auto; border-left: 4px solid var(--primary);">
+                <h3 style="color: var(--primary); margin-bottom: 10px;">Manufacturing</h3>
+                <p style="color: var(--tertiary); font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;">147 hours saved monthly</p>
+                <div style="display: grid; gap: 10px;">
+                    <div style="display: flex; align-items: start;">
+                        <span style="color: var(--primary); margin-right: 10px;">→</span>
+                        <p>Daily inventory reports: 4 hours → 20 minutes</p>
+                    </div>
+                    <div style="display: flex; align-items: start;">
+                        <span style="color: var(--primary); margin-right: 10px;">→</span>
+                        <p>Equipment status tracking: Manual → Real-time</p>
+                    </div>
+                    <div style="display: flex; align-items: start;">
+                        <span style="color: var(--primary); margin-right: 10px;">→</span>
+                        <p>Supplier order reconciliation: 6 systems → 1 automated flow</p>
+                    </div>
+                    <div style="display: flex; align-items: start;">
+                        <span style="color: var(--primary); margin-right: 10px;">→</span>
+                        <p>Quality control documentation: 3 hours → 15 minutes</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin-bottom: 30px;">Impact Stats</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3.2 hours</div>
+                    <div class="stat-label">Average time saved per employee daily</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15-40 tasks</div>
+                    <div class="stat-label">Tasks automated per company</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">45 days</div>
+                    <div class="stat-label">Average ROI timeline</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">User satisfaction score</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#contact" class="btn btn-primary">Calculate Your Savings → ROI Calculator</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries -->
+    <section>
+        <div class="container">
+            <h2>Industries We Transform</h2>
+
+            <div class="industry-grid">
+                <div class="industry-card">
+                    <h3 style="color: var(--primary);">Small Manufacturing</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">10-100 employees</p>
+
+                    <div class="industry-stat">
+                        <strong>Current State:</strong>
+                        <p style="color: var(--text-secondary);">3.8 hours/day on repetitive tasks</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>Annual Cost:</strong>
+                        <p class="highlight">$1.2M in lost productivity (50 employees)</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>STEBEQ Impact:</strong>
+                        <p class="highlight">147 hours saved monthly</p>
+                    </div>
+
+                    <div class="industry-benefits">
+                        <strong style="display: block; margin-bottom: 10px;">Freed Capacity:</strong>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Launch quality improvement initiatives</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Reduce errors by 23%</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Innovate production processes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <h3 style="color: var(--primary);">Professional Services</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">25-150 employees</p>
+
+                    <div class="industry-stat">
+                        <strong>Current State:</strong>
+                        <p style="color: var(--text-secondary);">3.2 hours/day on administrative work</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>Annual Cost:</strong>
+                        <p class="highlight">$1.8M in billable time lost (75 employees)</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>STEBEQ Impact:</strong>
+                        <p class="highlight">180 hours saved monthly</p>
+                    </div>
+
+                    <div class="industry-benefits">
+                        <strong style="display: block; margin-bottom: 10px;">Freed Capacity:</strong>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Focus on client strategy work</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Increase billable hours 28%</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Develop new service offerings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <h3 style="color: var(--primary);">Healthcare Administration</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">20-200 employees</p>
+
+                    <div class="industry-stat">
+                        <strong>Current State:</strong>
+                        <p style="color: var(--text-secondary);">4.1 hours/day on compliance paperwork</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>Annual Cost:</strong>
+                        <p class="highlight">$2.4M in administrative burden (100 employees)</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>STEBEQ Impact:</strong>
+                        <p class="highlight">205 hours saved monthly</p>
+                    </div>
+
+                    <div class="industry-benefits">
+                        <strong style="display: block; margin-bottom: 10px;">Freed Capacity:</strong>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Focus on patient care quality</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Reduce burnout significantly</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Improve satisfaction scores</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industry-card">
+                    <h3 style="color: var(--primary);">Mid-Size Retail</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">50-500 employees</p>
+
+                    <div class="industry-stat">
+                        <strong>Current State:</strong>
+                        <p style="color: var(--text-secondary);">2.9 hours/day on inventory/reporting</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>Annual Cost:</strong>
+                        <p class="highlight">$3.2M in operational overhead (200 employees)</p>
+                    </div>
+                    <div class="industry-stat">
+                        <strong>STEBEQ Impact:</strong>
+                        <p class="highlight">290 hours saved monthly</p>
+                    </div>
+
+                    <div class="industry-benefits">
+                        <strong style="display: block; margin-bottom: 10px;">Freed Capacity:</strong>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Optimize customer experience</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Develop merchandising strategies</p>
+                        </div>
+                        <div>
+                            <span>→</span>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Improve retention metrics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transformation">
+                <p><strong>Before STEBEQ:</strong> Employees execute tasks<br>
+                <strong>After STEBEQ:</strong> Employees drive innovation</p>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#contact" class="btn btn-primary">See Your Industry → Book Industry-Specific Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="form-section">
+        <div class="container">
+            <h2>Ready to Transform Your Workplace?</h2>
+            <p class="subtitle" style="text-align: center;">Book a personalized demo and discover how much time your team can reclaim.</p>
+
+            <div class="form-container">
+                <form id="contactForm" class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company Name *</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+
+                    <div class="form-group two-col">
+                        <div class="form-group">
+                            <label for="employees">Number of Employees</label>
+                            <select id="employees" name="employees">
+                                <option value="">Select range</option>
+                                <option value="10-25">10-25</option>
+                                <option value="26-50">26-50</option>
+                                <option value="51-100">51-100</option>
+                                <option value="101-250">101-250</option>
+                                <option value="251-500">251-500</option>
+                                <option value="500+">500+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="industry">Industry</label>
+                            <select id="industry" name="industry">
+                                <option value="">Select industry</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Professional Services">Professional Services</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="challenge">Primary Challenge</label>
+                        <textarea id="challenge" name="challenge" placeholder="Tell us about your biggest workflow challenge..."></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label style="font-weight: 600; margin-bottom: 10px; display: block;">Interested In:</label>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="assessment" name="interest[]" value="assessment">
+                            <label for="assessment">Free workflow assessment</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="demo" name="interest[]" value="demo">
+                            <label for="demo">Live demo</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="roi" name="interest[]" value="roi">
+                            <label for="roi">ROI calculation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pilot" name="interest[]" value="pilot">
+                            <label for="pilot">Pilot program details</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Book My Demo</button>
+
+                    <p class="privacy-note">We respect your privacy. Your information is secure and will never be shared.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>STEBEQ</h3>
+                    <p class="tagline">"Capture rhythm. Create harmony. Cultivate genius."</p>
+                    <p>STEBEQ transforms repetitive tasks into human creativity through transparent workflow intelligence.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Why STEBEQ</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#automation">ROI Calculator</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 STEBEQ LLC. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const themeIcon = document.getElementById('themeIcon');
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀' : '☾';
+        }
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your interest! We\'ll contact you within 24 hours to schedule your personalized demo.');
+            e.target.reset();
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
