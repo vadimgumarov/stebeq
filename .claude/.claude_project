@@ -1,0 +1,640 @@
+# [PROJECT_NAME] - [PROJECT_DESCRIPTION]
+
+> **Claude Code Integration**: This file provides project-specific context and configuration that supplements the universal development framework defined in CLAUDE.md.
+
+---
+
+## PROJECT CONFIGURATION
+
+### Project Identity
+```yaml
+PROJECT_NAME: "[Your Project Name]"
+PROJECT_TYPE: "[web/mobile/backend/desktop/data/other]"
+REPOSITORY: "[GitHub URL]"
+MAIN_LANGUAGE: "[primary programming language]"
+FRAMEWORK: "[main framework/library]"
+DATABASE: "[database technology]"
+DEPLOYMENT: "[platform/method]"
+VERSION: "[current version]"
+TEAM_SIZE: "solo" # Change to "team" for team scaling features
+TESTING_LEVEL: "enterprise" # enterprise/standard/basic
+```
+
+### Technology Stack
+```yaml
+Runtime: "[Node.js 18+, Python 3.11+, Go 1.21+, etc.]"
+Package Manager: "[npm, yarn, pip, go mod, etc.]"
+Build Tool: "[webpack, vite, make, docker, etc.]"
+Test Framework: "[jest, pytest, go test, etc.]"
+Linting: "[eslint, flake8, golangci-lint, etc.]"
+Formatting: "[prettier, black, gofmt, etc.]"
+CI/CD: "[GitHub Actions, GitLab CI, etc.]"
+```
+
+---
+
+## CRITICAL SAFETY RULES
+
+### Session Start Protocol (MANDATORY)
+1. **ALWAYS read docs/CONTINUATION.md FIRST** - Get current state and next steps
+2. **Read CLAUDE.md** - Understand process rules and workflows  
+3. **Read this file (.claude_project)** - Get project context
+4. **State current context** - [branch: ... | issue: #... | status: ...]
+5. **Proceed with TDD workflow** - Tests first, then implementation
+
+### Project-Specific Data Integrity
+*[CUSTOMIZE: Replace with your project's data safety rules]*
+
+**Example Templates - Replace with your actual rules:**
+```
+- NEVER use [unsafe_data_source] - [reason], use [safe_alternative] only
+- [service_name] is source of truth - All [data_type] from [service_name] API
+- [component_name] DISABLED - Returns empty responses, use [replacement]
+- [environment_name] only - Use [environment] instead of [unsafe_environment]
+```
+
+### Safety Defaults
+*[CUSTOMIZE: Replace with your project's safety defaults]*
+
+**Example Templates - Replace with your actual defaults:**
+```
+- Default to [safe_environment] environment/mode
+- Default to [safe_option] ([reason - e.g., "24/7 availability"])  
+- Default to [safe_configuration]
+- Run [safety_checks] before [critical_action]
+```
+
+### Documentation Enforcement (MANDATORY)
+- **PROGRESS.md** - MUST update when completing any issue
+- **CONTINUATION.md** - MUST update when switching tasks or completing work
+- **Both files** - MUST be updated before committing with "Complete Issue #" or "Closes #"
+- **State tracking** - MUST include [branch: ... | issue: #... | status: ...] in every response
+
+### STRICTLY PROHIBITED APPROACHES - NO EXCEPTIONS
+**Always fix the root problem. These workarounds are NEVER acceptable:**
+- ❌ **Switching ports/URLs** - Fix the blocking issue, don't change ports
+- ❌ **Mocking real components** - Fix the import/dependency, don't mock
+- ❌ **Hardcoding values** - Fix the config/system, don't hardcode  
+- ❌ **Skipping tests** - Fix the failing code, don't skip tests
+- ❌ **Commenting out code** - Debug and fix, don't comment out
+- ❌ **Creating "simplified" versions** - Fix the full system
+- ❌ **Workarounds instead of fixes** - Fix the root cause
+
+See CLAUDE.md "RED FLAGS" section for full details.
+
+---
+
+## ARCHITECTURE PRINCIPLES
+
+### Core Architectural Rule
+*[CUSTOMIZE: Replace with your main architectural approach]*
+
+**Template - Replace with your principle:**
+```
+[ARCHITECTURAL_PRINCIPLE]
+Examples: 
+- "ONE Component, MULTIPLE Behaviors" 
+- "Mobile-first, scalable design"
+- "Domain-driven microservices"
+- "Event-driven architecture"
+- "Microservices with API-first design"
+- "Layered architecture with clean separation"
+```
+
+**✅ Correct Pattern**: `[GoodExample]` [description of why this follows your principle]  
+**❌ Prohibited Pattern**: `[BadExample]` + `[AnotherBadExample]` [description of why this violates your principle]
+
+### Project Structure ([PROJECT_VERSION])
+*[CUSTOMIZE: Replace entire structure with your project's actual organization]*
+
+```
+[PROJECT_ROOT]/
+├── [main_source_folder]/        # [DESCRIPTION OF MAIN CODE]
+│   ├── [key_module]/           # [Module description]
+│   ├── [key_module]/           # [Module description]
+│   └── [key_module]/           # [Module description]
+├── [secondary_folder]/          # [DESCRIPTION OF SECONDARY CODE]  
+│   ├── [subfolder]/             # [Purpose]
+│   └── [subfolder]/             # [Purpose]
+├── [config_folder]/             # [CONFIGURATION MANAGEMENT]
+│   ├── [environment]/           # [Environment-specific configs]
+│   ├── [environment]/           # [Environment-specific configs]
+│   └── [environment]/           # [Environment-specific configs]
+├── tests/                       # COMPREHENSIVE TEST SUITE (Enterprise Level)
+│   ├── unit/                    # Unit tests (95%+ coverage target)
+│   │   ├── [module]/           # Tests organized by code module
+│   │   └── fixtures/           # Test data and mocks
+│   ├── integration/             # Integration tests with real dependencies
+│   │   ├── [feature]/          # Tests organized by feature
+│   │   └── contracts/          # API contract tests
+│   ├── e2e/                    # End-to-end user workflows (10% of tests)
+│   │   ├── [workflow]/         # Complete user journeys
+│   │   └── performance/        # Load and performance tests
+│   ├── mutation/               # Mutation testing for test quality
+│   ├── contract/               # Consumer-driven contract tests
+│   └── chaos/                  # Chaos engineering tests
+├── docs/                        # PROJECT DOCUMENTATION
+│   ├── PROGRESS.md              # Active progress tracking (read by Claude)
+│   ├── CONTINUATION.md          # Session state (READ FIRST)
+│   ├── ISSUES.md                # Problem/solution log
+│   ├── architecture/            # System design documentation
+│   ├── api/                    # API documentation
+│   ├── deployment/             # Deployment guides
+│   ├── features/               # Feature documentation
+│   └── [custom_categories]/    # Project-specific docs
+├── scripts/                     # UTILITY & AUTOMATION SCRIPTS
+│   ├── testing/                # Test automation and utilities
+│   ├── deployment/             # Deployment automation
+│   ├── setup/                  # Environment setup scripts
+│   └── maintenance/            # Maintenance and cleanup scripts
+└── [infrastructure_folder]/     # [DEPLOYMENT/INFRASTRUCTURE]
+    ├── [config_type]/           # [Infrastructure configs]
+    └── [config_type]/           # [Infrastructure configs]
+```
+
+### Clean Separation (ARCHITECTURAL BOUNDARIES)
+*[CUSTOMIZE: Define your architectural boundaries - examples below]*
+```
+- [Frontend/Backend/Mobile]: [responsibility and scope]
+- [Core/Adapters/Services]: [responsibility and scope]
+- [Domain/Infrastructure/Presentation]: [responsibility and scope]  
+- No duplication: Single source of truth for shared logic and data
+```
+
+---
+
+## DEVELOPMENT WORKFLOW
+
+### Primary Development Process
+*[CUSTOMIZE: Replace with your project-specific development workflow]*
+
+**Template - Replace with your actual workflow:**
+```
+[Main Development Process]
+Description: [How developers work on this project - e.g., launcher commands, build process, dev server, etc.]
+```
+
+### Command Structure & Scripts
+*[CUSTOMIZE: Replace with your actual commands]*
+
+#### Development Commands
+```bash
+# [Primary development command - e.g., "Start development server"]
+[command] [required_args] [optional_flags]
+# Example: npm run dev --port=3000
+
+# [Secondary development command - e.g., "Build for production"]  
+[command] [required_args] [optional_flags]
+# Example: npm run build
+
+# [Database/service command - e.g., "Start database"]
+[command] [required_args] [optional_flags]  
+# Example: docker-compose up -d postgres
+```
+
+#### Testing Commands (Enterprise TDD)
+```bash
+# Unit tests (fast, run before every commit)
+[unit_test_command]
+# Examples: npm test -- --testPathPattern=unit, pytest tests/unit/, go test ./tests/unit/...
+
+# Integration tests (real dependencies, run after completing features)
+[integration_test_command]
+# Examples: npm test -- --testPathPattern=integration, pytest tests/integration/
+
+# End-to-end tests (complete workflows, run before releases)
+[e2e_test_command] 
+# Examples: npm run test:e2e, pytest tests/e2e/, cypress run
+
+# Full test suite with coverage
+[full_test_command]
+# Examples: npm run test:all, pytest --cov=src --cov-report=html
+
+# Mutation testing (test quality verification)
+[mutation_test_command]
+# Examples: npm run test:mutation, mutmut run
+
+# Performance testing
+[performance_test_command]
+# Examples: npm run test:perf, pytest tests/performance/
+
+# Contract testing
+[contract_test_command] 
+# Examples: npm run test:contract, pact-verify
+```
+
+#### Quality Assurance Commands
+```bash
+# Code formatting
+[format_command]
+# Examples: npm run format, black src/, gofmt -w .
+
+# Linting
+[lint_command]
+# Examples: npm run lint, flake8 src/, golangci-lint run
+
+# Security scanning  
+[security_scan_command]
+# Examples: npm audit, safety check, gosec ./...
+
+# Dependency updates
+[dependency_update_command]
+# Examples: npm update, pip-review --auto, go get -u ./...
+```
+
+---
+
+## CONFIGURATION MANAGEMENT
+
+### Environment Variables
+*[CUSTOMIZE: List your project's environment variables]*
+
+```bash
+# Development Environment (default)
+[VAR_NAME]=[example_development_value]
+[VAR_NAME]=[example_development_value]
+# Examples:
+# DATABASE_URL=postgresql://localhost:5432/myapp_dev
+# API_BASE_URL=http://localhost:3000/api
+# LOG_LEVEL=debug
+
+# Testing Environment  
+[VAR_NAME]=[example_testing_value]
+[VAR_NAME]=[example_testing_value]
+# Examples:
+# DATABASE_URL=postgresql://localhost:5432/myapp_test
+# API_BASE_URL=http://localhost:3000/api
+# LOG_LEVEL=info
+
+# Production Environment
+[VAR_NAME]=[example_production_value]
+[VAR_NAME]=[example_production_value]
+# Examples:
+# DATABASE_URL=${DATABASE_URL} # From environment
+# API_BASE_URL=https://api.yourapp.com
+# LOG_LEVEL=error
+```
+
+### Configuration Files
+*[CUSTOMIZE: List important config files and their purposes]*
+```
+- [config_file]: [purpose and key settings]
+- [config_file]: [purpose and key settings]
+- [config_file]: [purpose and key settings]
+
+Examples:
+- package.json: Dependencies, scripts, project metadata
+- .env.example: Environment variable template
+- tsconfig.json: TypeScript configuration
+- jest.config.js: Test framework configuration
+- docker-compose.yml: Local development services
+```
+
+---
+
+## [PROJECT_TYPE] ARCHITECTURE
+
+*[CUSTOMIZE: Replace this entire section with your project's specific architecture]*
+
+### [Primary_System/Component] Architecture
+*[Describe your main system/component and how it works]*
+```
+[Code example, flow diagram, or configuration example]
+
+Example for a REST API:
+POST /api/users
+├── Authentication Middleware
+├── Validation Middleware  
+├── User Controller
+├── User Service
+├── User Repository
+└── Database Layer
+```
+
+### [Secondary_System/Component]
+*[Describe secondary systems, APIs, or integrations]*
+```
+[Code example, flow diagram, or configuration example]
+
+Example for a frontend:
+User Action → Component → State Management → API Call → Backend
+     ↓
+UI Update ← Component ← State Update ← Response ← Database
+```
+
+### [Key_Integration/Service/API]
+*[Describe important integrations, third-party services, or APIs]*
+```
+[Configuration example, flow description, or usage patterns]
+
+Example for external API:
+Authentication: Bearer token in Authorization header
+Rate limiting: 100 requests/minute per API key
+Error handling: Standard HTTP status codes with JSON error responses
+```
+
+---
+
+## DATA & STATE MANAGEMENT
+
+### Database Schema & Migrations
+*[CUSTOMIZE: Describe your data architecture]*
+```
+- Primary Database: [PostgreSQL, MongoDB, MySQL, etc.]
+- Migration Tool: [Alembic, Prisma, Flyway, etc.]
+- Schema Versioning: [approach to schema changes]
+- Backup Strategy: [automated backups, retention policy]
+
+Example:
+- Primary: PostgreSQL 15+ with JSONB support
+- Migrations: Alembic with automatic version tracking
+- Schema: Event-sourced with CQRS pattern
+- Backups: Daily automated to S3 with 30-day retention
+```
+
+### State Management Pattern
+*[CUSTOMIZE: Describe how application state is managed]*
+```
+[State management approach - Redux, Vuex, Context API, etc.]
+
+Example for React:
+- Global State: Redux Toolkit with RTK Query
+- Local State: React hooks (useState, useEffect)
+- Server State: TanStack Query for caching
+- Form State: React Hook Form with Zod validation
+```
+
+---
+
+## DEPLOYMENT & OPERATIONS
+
+### [Development] Environment
+*[CUSTOMIZE: Replace with your development environment setup]*
+```bash
+# [Setup description - e.g., "Start development environment"]
+[command]
+[command]
+
+# Example:
+# Start all development services
+docker-compose up -d
+npm install
+npm run dev
+```
+
+### [Production] Environment  
+*[CUSTOMIZE: Replace with production environment details]*
+```bash
+# [Deployment description - e.g., "Deploy to production"]
+[command]
+
+# [Health check or verification command]
+[command]
+
+# Examples:
+# Deploy to production
+kubectl apply -f k8s/
+# or
+docker build -t myapp:latest . && docker push myapp:latest
+
+# Health check
+curl -f https://api.yourapp.com/health || exit 1
+```
+
+### Service URLs & Endpoints
+*[CUSTOMIZE: Replace with your actual service URLs]*
+```
+Development:
+- Frontend: http://localhost:[port]
+- Backend API: http://localhost:[port]/api
+- Database: localhost:[port]
+- Documentation: http://localhost:[port]/docs
+
+Production:
+- Frontend: https://[domain]
+- Backend API: https://api.[domain]
+- Admin Panel: https://admin.[domain]
+- Documentation: https://docs.[domain]
+```
+
+---
+
+## TESTING STRATEGY (ENTERPRISE TDD)
+
+### TDD Workflow Implementation
+*[CUSTOMIZE: Define your specific TDD implementation]*
+```
+1. Write Failing Test:
+   - [test_command] [specific_test_file]
+   - Verify test fails for the right reason
+   
+2. Write Minimal Implementation:
+   - Code just enough to make test pass
+   - No premature optimization
+   
+3. Refactor Safely:
+   - Improve code while keeping tests green
+   - Run full test suite after refactoring
+   
+4. Integration Testing:
+   - Test component interactions
+   - Use real dependencies, no mocks
+   
+5. End-to-End Testing:
+   - Test complete user workflows
+   - Verify business value delivery
+```
+
+### Test Data Management
+*[CUSTOMIZE: Define test data strategies]*
+```
+- Test Database: [separate test database strategy]
+- Test Data: [factories, fixtures, or generated data]
+- Cleanup Strategy: [how tests clean up after themselves]
+- Isolation: [how tests avoid interfering with each other]
+
+Example:
+- Test DB: Separate PostgreSQL instance with Docker
+- Test Data: Factory Boy with realistic fake data
+- Cleanup: Automatic transaction rollback after each test
+- Isolation: Each test runs in its own transaction
+```
+
+### Performance & Load Testing
+*[CUSTOMIZE: Define performance testing approach]*
+```
+- Performance Targets: [response times, throughput, etc.]
+- Load Testing Tools: [k6, JMeter, Artillery, etc.]
+- Monitoring: [APM tools, custom metrics]
+- Regression Testing: [automated performance regression detection]
+
+Example:
+- Targets: 95th percentile < 200ms, 1000 concurrent users
+- Tools: k6 for load testing, Prometheus for monitoring
+- CI Integration: Performance tests in staging environment
+- Alerts: Automatic alerts for 20% performance degradation
+```
+
+---
+
+## SECURITY & COMPLIANCE
+
+### Security Requirements
+*[CUSTOMIZE: Define security standards for your project]*
+```
+- Authentication: [OAuth2, JWT, session-based, etc.]
+- Authorization: [RBAC, ABAC, simple roles, etc.]
+- Data Encryption: [at rest, in transit, key management]
+- Security Scanning: [SAST, DAST, dependency scanning]
+
+Example:
+- Auth: OAuth2 with PKCE, JWT tokens with 15min expiry
+- Authorization: RBAC with role hierarchy
+- Encryption: AES-256 at rest, TLS 1.3 in transit
+- Scanning: CodeQL, Snyk, automated in CI/CD
+```
+
+### Compliance & Auditing
+*[CUSTOMIZE: Define compliance requirements if applicable]*
+```
+- Standards: [GDPR, HIPAA, SOC2, PCI-DSS, etc.]
+- Audit Logging: [what to log, retention policy]
+- Data Privacy: [PII handling, right to deletion, etc.]
+- Monitoring: [security event monitoring, alerting]
+
+Example:
+- Standards: GDPR compliance for EU users
+- Logging: All user actions logged for 2 years
+- Privacy: Automated PII deletion on user request
+- Monitoring: Real-time security alerts via Slack
+```
+
+---
+
+## MONITORING & OBSERVABILITY
+
+### Application Monitoring
+*[CUSTOMIZE: Define monitoring strategy]*
+```
+- APM: [New Relic, DataDog, AppDynamics, etc.]
+- Logs: [structured logging, log aggregation]
+- Metrics: [custom metrics, business metrics]
+- Alerts: [alert thresholds, notification channels]
+
+Example:
+- APM: DataDog with custom dashboards
+- Logs: Structured JSON logs with ELK stack
+- Metrics: Prometheus with Grafana dashboards
+- Alerts: PagerDuty for critical, Slack for warnings
+```
+
+### Error Tracking & Debugging
+*[CUSTOMIZE: Define error handling approach]*
+```
+- Error Tracking: [Sentry, Bugsnag, Rollbar, etc.]
+- Debug Tools: [debugger configuration, profiling]
+- Error Recovery: [graceful degradation, circuit breakers]
+- User Impact: [error rate monitoring, user experience tracking]
+
+Example:
+- Tracking: Sentry with error grouping and notifications
+- Debugging: Built-in debugger with source maps
+- Recovery: Circuit breakers for external services
+- Impact: Real user monitoring with performance budgets
+```
+
+---
+
+## CURRENT PROJECT STATUS
+
+### [Current_Epic/Phase/Milestone] [STATUS_EMOJI]
+*[CUSTOMIZE: Replace with actual current work status]*
+```
+Current Work:
+- Issue #[number]: [detailed description of current work]
+- Status: [In Progress, Testing, Code Review, etc.]
+- Progress: [percentage or milestone completion]
+- Blockers: [any current blockers or dependencies]
+- Next: [next major milestone or deliverable]
+
+Recent Accomplishments:
+- [Key accomplishment with business impact]
+- [Technical achievement with performance impact]  
+- [Quality improvement with measurable results]
+```
+
+### Component Status
+*[CUSTOMIZE: List current state of major components]*
+```
+✅ Ready for Production:
+- [Component/Feature]: [status and description]
+- [Component/Feature]: [status and description]
+
+🚧 In Development:  
+- [Component/Feature]: [status and current work]
+- [Component/Feature]: [status and current work]
+
+📋 Planned:
+- [Component/Feature]: [planned status and timeline]
+- [Component/Feature]: [planned status and timeline]
+```
+
+### Quality Metrics
+*[CUSTOMIZE: Track key quality indicators]*
+```
+Code Quality:
+- Test Coverage: [current percentage]
+- Code Quality Score: [SonarQube, CodeClimate score]
+- Technical Debt: [time to address, priority items]
+- Security Score: [security scanning results]
+
+Performance:
+- Page Load Time: [current metrics vs targets]
+- API Response Time: [95th percentile times]
+- Database Performance: [query times, optimization status]
+- User Experience: [Core Web Vitals, user satisfaction]
+```
+
+---
+
+## CUSTOMIZATION CHECKLIST
+
+### 🔥 CRITICAL (Must customize immediately - 5 minutes):
+- [ ] **Project title and description** (line 1)
+- [ ] **Project configuration** (lines 8-20) - Set technology stack
+- [ ] **Data integrity rules** (lines 33-40) - Define data safety rules
+- [ ] **Safety defaults** (lines 43-50) - Set environment and operational defaults
+- [ ] **Core architectural principle** (line 69) - Define main design approach
+- [ ] **Project structure** (lines 78-125) - Map actual folder organization
+
+### ⚠️ HIGH PRIORITY (Customize before first session - 15 minutes):
+- [ ] **Development commands** (lines 138-158) - Add build/run/test commands
+- [ ] **Testing commands** (lines 160-185) - Configure TDD workflow commands
+- [ ] **Environment variables** (lines 200-225) - List required environment configuration
+- [ ] **Service URLs** (lines 275-290) - Set development and production endpoints
+- [ ] **Current status** (lines 420-450) - Update with actual project state
+
+### 📋 MEDIUM PRIORITY (Customize during development):
+- [ ] **Architecture details** (lines 235-270) - Document system design
+- [ ] **Testing strategy** (lines 295-330) - Define TDD implementation details
+- [ ] **Security requirements** (lines 335-360) - Configure security standards
+- [ ] **Monitoring setup** (lines 365-390) - Set up observability tools
+
+### 💡 LOW PRIORITY (Nice to have):
+- [ ] **Clean separation rules** (lines 127-133) - Define architectural boundaries
+- [ ] **Deployment operations** (lines 275-290) - Document deployment procedures
+- [ ] **Compliance requirements** (lines 350-365) - Add regulatory requirements
+
+### ✅ ALREADY COMPLETE (Universal - No changes needed):
+- Session Start Protocol  
+- STRICTLY PROHIBITED APPROACHES
+- Documentation Enforcement
+- TDD Workflow Requirements
+- Quality Assurance Standards
+
+---
+
+**Configuration Version**: Project-Specific v2.1  
+**TDD Integration**: Enterprise test-driven development configured  
+**Solo Development**: Optimized for single developer with team scaling preparation  
+**Claude Code Ready**: Fully compatible with Claude Code workflows and conventions
